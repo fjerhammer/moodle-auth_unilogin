@@ -175,7 +175,7 @@ class auth_plugin_unilogin extends auth_plugin_base {
      */
     public function validate_ticket($username, $timestamp, $auth) {
         $fingerprint = md5($timestamp . $this->config->secret . $username);
-        if ($fingerprint !== $auth) {
+        if (!hash_equals($fingerprint, $auth)) {
             return false;
         }
 
