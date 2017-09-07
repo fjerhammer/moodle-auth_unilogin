@@ -96,7 +96,9 @@ class auth_plugin_unilogin extends auth_plugin_base {
         // Query the webservice for user info http://stil.dk/~/media/UNIC/Filer/Publikationer/Tekniske%20vejledninger/uni-login-infotjenestenswebservice_ws02.pdf
 
         try {
-            $client = new SoapClient('https://ws02.infotjeneste.uni-c.dk/infotjeneste-ws/ws?WSDL');
+            $client = new SoapClient('https://ws02.infotjeneste.uni-c.dk/infotjeneste-ws/ws?WSDL', array(
+                'soap_version' => SOAP_1_2
+            ));
             $user = $client->hentPerson(array(
                 'wsBrugerid' => $this->config->wsid,
                 'wsPassword' => $this->config->wssecret,
